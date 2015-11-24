@@ -1,0 +1,41 @@
+module Twocheckout
+
+  class Subscription
+
+    attr_reader :vendor_product_id, :installment, :description, :type, :usd_amount, :tangible, :status, :vendor_amount, :customer_amount, :name, :timestamp, :duration, :startup_fee, :active, :id, :price, :recurrence, :handling
+
+    def initialize(hash)
+      @id = hash['id']
+      @timestamp = hash['timestamp']
+      @type = hash['type']
+      @status = hash['status']
+      @installment = hash['installment']
+      @usd_amount = hash['usd_amount']
+      @vendor_amount = hash['vendor_amount']
+      @customer_amount = hash['customer_amount']
+      @vendor_product_id = hash['vendor_product_id']
+      @name = hash['name']
+      @description = hash['description']
+      @price = hash['price']
+      @handling = hash['handling']
+      @tangible = hash['tangible']
+      @startup_fee = hash['startup_fee']
+      @recurrence = hash['recurrence']
+      @duration = hash['duration']
+      @active = hash['active']
+    end
+
+    def self.stop(subscription_id)
+      response = Twocheckout::Requestor.request(:post, "subscriptions/#{subscription_id}/stop", nil)
+      Subscription.new(response['subscription'])
+    end
+
+    def self.find(subscription_id)
+      response = Twocheckout::Requestor.request(:get, "subscriptions/#{subscription_id}", nil)
+      Subscription.new(response['subscription'])
+    end
+
+  end
+
+
+end

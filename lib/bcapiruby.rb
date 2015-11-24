@@ -1,0 +1,7 @@
+require 'rspec'
+require 'bcapiruby/requestor'
+require 'bcapiruby/sale'
+require 'bcapiruby/invoice'
+require 'bcapiruby/payment_method'
+require 'bcapiruby/subscription'
+require 'bcapiruby/customer'
